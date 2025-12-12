@@ -4,7 +4,7 @@ number_to_guess = random.randint(1, 100)
 
 is_guessed = False
 
-winner = f'Congratulations! You guessed the number'
+winner_message = f'Congratulations! You guessed the number'
 
 error = f'Invalid choice!'
 
@@ -14,13 +14,17 @@ while not is_guessed:
 
         if 1 <= guess <=100:    #confirm guess validity
             if guess == number_to_guess:
-                print(winner)
+                print(winner_message)
                 is_guessed = True
+
             elif guess < number_to_guess:
                 print(f'Too low!')
+
             elif guess > number_to_guess:
                 print(f'Too high!')
+
         else:
             print(error)
+
     except ValueError:  #prevent crash if guess isn't an integer
         print(error)
