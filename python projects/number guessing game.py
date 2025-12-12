@@ -1,9 +1,13 @@
 import random
 
 number_to_guess = random.randint(1, 100)
+
 is_guessed = False
+
 winner = f'Congratulations! You guessed the number'
+
 error = f'Invalid choice!'
+
 while not is_guessed:
     try:
         guess = int(input(f'Guess the number between 1 and 100: '))
@@ -18,5 +22,5 @@ while not is_guessed:
                 print(f'Too high!')
         else:
             print(error)
-    except ValueError:  #prevert crash if guess isn't an integer
+    except ValueError:  #prevent crash if guess isn't an integer
         print(error)

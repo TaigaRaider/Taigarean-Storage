@@ -26,20 +26,19 @@ def player_input():
             sys.exit()
         else:
             print(error)
-        #
-        # elif choice == 'quit':
-        #     break
+
 def display_choice(player_choice, computer_choice):
-    print(f"You picked{choices[player_choice]}\nComputer picked{choices[computer_choice]}")
+    print(f"You picked{choices[player_choice]}\n"
+          f"Computer picked{choices[computer_choice]}")
 
 
-def determine_winner(choice, comp_choice):
+def determine_winner(player_choice, computer_choice):
     while True:
-        if  choice == comp_choice:
+        if  player_choice == computer_choice:
             return f"It's a Tie!"
-        elif ((choice == ROCK and comp_choice == SCISSORS) or
-              (choice == PAPER and comp_choice == ROCK) or
-              (choice == SCISSORS and comp_choice == PAPER)):
+        elif ((player_choice == ROCK and computer_choice == SCISSORS) or
+              (player_choice == PAPER and computer_choice == ROCK) or
+              (player_choice == SCISSORS and computer_choice == PAPER)):
             return f"You won!"
 
         else:
@@ -48,19 +47,22 @@ def determine_winner(choice, comp_choice):
 
 def game_play():
     while True:
-        choice = player_input()
-        comp_choice = random.choice(choice_list)
-        display_choice(choice,comp_choice)
-        print(determine_winner(choice, comp_choice))
+        player_choice = player_input()
+        computer_choice = random.choice(choice_list)
+        display_choice(player_choice,computer_choice)
+        print(determine_winner(player_choice, computer_choice))
 
-        while determine_winner(choice, comp_choice) == "You won!":
+        while determine_winner(player_choice, computer_choice) == "You won!":
             replay = input(f"Continue? (y/n) ").strip().lower()
             if replay in ("y", "n"):
+
                 if replay == "n":
                     print(f"Thanks for playing")
                     sys.exit()
+
                 elif replay == "y":
                     game_play()
+
             else:
                 print(error)
 
