@@ -1,8 +1,39 @@
 import random
 
+from colorama import Fore
+
 arr = []
 index = 0
 
+
+def get_work_members():
+    while index < members:
+        try:
+            member = int(input(f"Enter a number"))
+            arr.append(member)
+        except ValueError:
+            get_work_members()
+
+
+def work_main():
+    members = int(input(f"How many numbers are in the group? "))
+
+    for member in arr:
+        maximum = arr[0]
+        if member > maximum:
+            maximum = member
+    return maximum
+
+
+def work_fun():
+    decision = input(f"{Fore.BLUE}Do you want to have fun or do you want to just work? ")
+    if decision == "work":
+        workmax = work_main()
+        return workmax
+    elif decision == "fun":
+        fun_main()
+    else:
+        pass
 
 def get_numberofmembers():
     try:
@@ -39,12 +70,6 @@ def generate_numbers(numberofmembers, lower_boundary, upper_boundary):
         member = random.randint(lower_boundary, upper_boundary)
         arr.append(member)
 
-
-lowerBoundary = define_lower_boundary()
-upperBoundary = define_upper_boundary()
-numberOfMembers = get_numberofmembers()
-
-
 def find_largest_member():
     while index <= len(arr) - 1:
         if index == len(arr) - 1:
@@ -55,7 +80,12 @@ def find_largest_member():
             arr.pop(index + 1)
     print(arr)
 
-def main():
+
+def fun_main():
+    lowerBoundary = define_lower_boundary()
+    upperBoundary = define_upper_boundary()
+    numberOfMembers = get_numberofmembers()
+
     generate_numbers(numberOfMembers, lowerBoundary, upperBoundary)
     print(arr)
     print(f"The Lower Boundary of this selection is: {lowerBoundary}")
@@ -63,4 +93,5 @@ def main():
     print(f"The Number of Members in this selection is: {numberOfMembers}")
     find_largest_member()
 
-main()
+
+work_fun()
