@@ -1,16 +1,20 @@
 import random
-
-from colorama import Fore
+from colorama import Fore   #this was done just for fun
 
 arr = []
+random_difference = random.randint(0, 10)
+
 index = 0
 
 
-def int_error():
+def int_error():    #Reusability!
     print(f"Enter ONLY INTEGERS")
 
 
 def get_work_members(members, work_index):
+    #I defined a new index function here specifically for the work function;
+    #To eliminate the need for creating a new variable for it and also boost ease of use.
+
     work_array = []
     while work_index < members:
         try:
@@ -37,28 +41,6 @@ def define_number_of_members():
         define_number_of_members()
 
 
-def work():
-    work_array = get_work_members(define_number_of_members(), 0)
-    work_maximum = work_array[0]
-
-    for member in work_array:
-        if member > work_maximum:
-            work_maximum = member
-    return work_maximum
-
-
-def main():
-    decision = input(
-        f"{Fore.RED}Do you want to have {Fore.YELLOW}fun{Fore.RED} or do you want to just {Fore.CYAN}work? ").strip().lower()
-    if decision == "work":
-        return print(work())
-    elif decision == "fun":
-        return fun()
-    else:
-        print("ERROR Invalid input!")
-        return main()
-
-
 def get_numberofmembers():
     try:
         numberofmembers = int(input("How many numbers should your array contain? "))
@@ -72,19 +54,30 @@ def define_lower_boundary():
     try:
         lower_boundary = int(input("What should be the lower boundary of the array? "))
         return lower_boundary
+
     except ValueError:
         int_error()
         define_lower_boundary()
 
 
-def define_upper_boundary(lower_boundary):
+def define_upper_boundary():
     try:
         upper_boundary = int(input("What should be the upper boundary of the array? "))
-        upper_boundary = upper_boundary - random.randint(0, 10)
+        upper_boundary = upper_boundary - random_difference
+
         return upper_boundary
     except ValueError:
         int_error()
         define_upper_boundary()
+
+
+def maintain_boundary_range_balance(lower_boundary, upper_boundary):
+    if upper_boundary<lower_boundary:
+        upper_boundary = upper_boundary + random_difference
+    else:
+        upper_boundary = upper_boundary
+        #Just for the sake of a complete if-else statement, I equated the upper boundary to the same value passed as an argument.
+    return upper_boundary
 
 
 def generate_numbers(numberofmembers, lower_boundary, upper_boundary):
@@ -104,23 +97,44 @@ def find_largest_member():
     print(arr)
 
 
+def work():
+    work_array = get_work_members(define_number_of_members(), 0)
+    work_maximum = work_array[0]
+
+    for member in work_array:
+        if member > work_maximum:
+            work_maximum = member
+    return work_maximum
+
+
 def fun():
     lowerboundary = define_lower_boundary()
     upperboundary = define_upper_boundary()
     numberofmembers = get_numberofmembers()
 
+    upperboundary = maintain_boundary_range_balance(lowerboundary, upperboundary)
+    #I restated the value of upper_boundary just incase the random difference doesn't set off an error with the random.randrange function
     generate_numbers(numberofmembers, lowerboundary, upperboundary)
+
     print(arr)
     print(f"The Lower Boundary of this selection is: {lowerboundary}")
     print(f"The Upper Boundary of this selection is: {upperboundary}")
     print(f"The Number of Members in this selection is: {numberofmembers}")
+
     find_largest_member()
 
 
-if __name__ == '__main__':
+def main():     #the main function of the code that sums up all relevant outcomes of this program
+    decision = input(
+        f"{Fore.RED}Do you want to have {Fore.YELLOW}fun{Fore.RED} or do you want to just {Fore.CYAN}work? ").strip().lower()
+    if decision == "work":
+        return print(work())
+    elif decision == "fun":
+        return fun()
+    else:
+        print("ERROR Invalid input!")
+        return main()
+
+
+if __name__ == '__main__':  #this ensures ease of access when this script is imported into another script
     main()
-
-#         if lower_boundary < upper_boundary:
-#             upper_boundary = upper_boundary
-#         else:
-
