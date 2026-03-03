@@ -4,16 +4,16 @@ from colorama import Fore   #this was done just for fun
 arr = []
 random_difference = random.randint(0, 10)
 
-index = 0
+global_index = 0
 
 
 def int_error():    #Reusability!
     print(f"Enter ONLY INTEGERS")
 
-
+#redesign required
 def get_work_members(members, work_index):
-    #I defined a new index function here specifically for the work function;
-    #To eliminate the need for creating a new variable for it and also boost ease of use.
+    #I defined a new parameter index here specifically for the work function;
+    #To eliminate the need for creating a new variable for it and also ease accessibility
 
     work_array = []
     while work_index < members:
@@ -28,8 +28,7 @@ def get_work_members(members, work_index):
         #The try-except statements are used here to prevent crashing due ValueError from inserting a string
         # or any non integer into an integer variable
 
-        if work_index == members:
-            print("Done!")
+    print("Done!")
         #This is a teaser to an incoming feature;
         #where I will implement the time module to mae the fun function much more interactive, Stay Tuned.
     return work_array
@@ -91,6 +90,7 @@ def generate_numbers(numberofmembers, lower_boundary, upper_boundary):
 
 
 def find_largest_member():
+    index = global_index
     while index <= len(arr) - 1:
         if index == len(arr) - 1:
             break
