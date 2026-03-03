@@ -25,9 +25,13 @@ def get_work_members(members, work_index):
         except ValueError:
             int_error()
             get_work_members(members, work_index)
+        #The try-except statements are used here to prevent crashing due ValueError from inserting a string
+        # or any non integer into an integer variable
 
         if work_index == members:
             print("Done!")
+        #This is a teaser to an incoming feature;
+        #where I will implement the time module to mae the fun function much more interactive, Stay Tuned.
     return work_array
 
 
@@ -90,20 +94,27 @@ def find_largest_member():
     while index <= len(arr) - 1:
         if index == len(arr) - 1:
             break
+        #This ensures the while loop is terminated when all members have been evaluated
+
         if arr[index] <= arr[index + 1]:
             arr.pop(index)
         elif arr[index] >= arr[index + 1]:
             arr.pop(index + 1)
+        #The pop method allows us to remove the lesser element in the collection
     print(arr)
 
 
 def work():
     work_array = get_work_members(define_number_of_members(), 0)
     work_maximum = work_array[0]
+    #Here the max is set to the first element in the collection
 
     for member in work_array:
         if member > work_maximum:
             work_maximum = member
+    #The algorithms for the fun and work max functions are different just because I wanted test the different ways I could
+    #evaluate the largest element in a collection
+
     return work_maximum
 
 
@@ -136,5 +147,5 @@ def main():     #the main function of the code that sums up all relevant outcome
         return main()
 
 
-if __name__ == '__main__':  #this ensures ease of access when this script is imported into another script
+if __name__ == '__main__':  #This ensures ease of access when this script is imported into another script
     main()

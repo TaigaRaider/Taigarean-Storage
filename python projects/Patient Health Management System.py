@@ -9,7 +9,7 @@ class  User:
         pass
     def __delete__(self, instance):
         pass
-    pass
+
 class Doctor(User):
     pass
 class Patient(User):
