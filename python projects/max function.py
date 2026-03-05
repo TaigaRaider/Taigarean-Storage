@@ -3,35 +3,35 @@ from colorama import Fore   #this was done just for fun
 
 arr = []
 random_difference = random.randint(0, 10)
-
 global_index = 0
 
 
 def int_error():    #Reusability!
     print(f"Enter ONLY INTEGERS")
 
-#redesign required
+
 def get_work_members(members, work_index):
     #I defined a new parameter index here specifically for the work function;
     #To eliminate the need for creating a new variable for it and also ease accessibility
 
-    work_array = []
     while work_index < members:
         try:
             member = int(input(f"Enter a number "))
-            work_array.append(member)
+            arr.append(member)
             work_index += 1
-            print(f"{work_array}, {work_index}")
+            print(f"{arr}, {work_index}")
         except ValueError:
             int_error()
             get_work_members(members, work_index)
+            break
         #The try-except statements are used here to prevent crashing due ValueError from inserting a string
-        # or any non integer into an integer variable
+        # or any non-integer into an integer variable
+    if work_index == members:
+        print("Done!")
 
-    print("Done!")
         #This is a teaser to an incoming feature;
         #where I will implement the time module to mae the fun function much more interactive, Stay Tuned.
-    return work_array
+    return arr
 
 
 def define_number_of_members():
@@ -125,6 +125,7 @@ def fun():
 
     upperboundary = maintain_boundary_range_balance(lowerboundary, upperboundary)
     #I restated the value of upper_boundary just incase the random difference doesn't set off an error with the random.randrange function
+
     generate_numbers(numberofmembers, lowerboundary, upperboundary)
 
     print(arr)
@@ -137,7 +138,7 @@ def fun():
 
 def main():     #the main function of the code that sums up all relevant outcomes of this program
     decision = input(
-        f"{Fore.RED}Do you want to have {Fore.YELLOW}fun{Fore.RED} or do you want to just {Fore.CYAN}work? ").strip().lower()
+        f"{Fore.WHITE}Do you want to have {Fore.YELLOW}fun{Fore.RED} or do you want to just {Fore.CYAN}work? ").strip().lower()
     if decision == "work":
         return print(work())
     elif decision == "fun":
