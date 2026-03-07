@@ -101,6 +101,7 @@ def find_largest_member():
         elif arr[index] >= arr[index + 1]:
             arr.pop(index + 1)
         #The pop method allows us to remove the lesser element in the collection
+        #WARNING ENSURE THE POP parentheses aren't empty as that simply removes the last member of the list
     print(arr)
 
 
